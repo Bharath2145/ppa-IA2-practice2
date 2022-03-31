@@ -1,1 +1,142 @@
+gcc -g p8original.c
+ gdb a.out
+GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from a.out...done.
+(gdb) b main
+Breakpoint 1 at 0xaf9: file p8original.c, line 63.
+(gdb) r
+Starting program: /home/runner/ppa-IA2-practice2/a.out 
+warning: Error disabling address space randomization: Operation not permitted
 
+Breakpoint 1, main () at p8original.c:63
+63  {
+(gdb) n
+64    int n = input_n();
+(gdb) s
+input_n () at p8original.c:8
+8   {
+(gdb) n
+10    printf("Enter the number of triangles: \n");
+(gdb) n
+Enter the number of triangles: 
+11    scanf("%d",&n);
+(gdb) n
+3
+12    return n;
+(gdb) n
+13  }
+(gdb) n
+main () at p8original.c:65
+65    Triangle t[n];
+(gdb) s
+66    input_n_triangles(n, t);
+(gdb) s
+input_n_triangles (n=3, t=0x7ffdfca8b760) at p8original.c:23
+23    for(int i=0;i<n;i++)
+(gdb) n
+25      t[i] = input_triangle();
+(gdb) n
+Enter the base, altitude of a triangle:
+2
+4
+23    for(int i=0;i<n;i++)
+(gdb) n
+25      t[i] = input_triangle();
+(gdb) n
+Enter the base, altitude of a triangle:
+4
+6
+23    for(int i=0;i<n;i++)
+(gdb) n
+25      t[i] = input_triangle();
+(gdb) n
+Enter the base, altitude of a triangle:
+4
+8
+23    for(int i=0;i<n;i++)
+(gdb) n
+27  }
+(gdb) n
+main () at p8original.c:67
+67    find_areas_n(n, t);
+(gdb) s
+find_areas_n (n=3, t=0x7ffdfca8b760) at p8original.c:34
+34    for (int i = 0; i < n; i++)
+(gdb) n
+36      find_area(&t[i]);
+(gdb) n
+34    for (int i = 0; i < n; i++)
+(gdb) n
+36      find_area(&t[i]);
+(gdb) n
+34    for (int i = 0; i < n; i++)
+(gdb) n
+36      find_area(&t[i]);
+(gdb) n
+34    for (int i = 0; i < n; i++)
+(gdb) n
+38  }
+(gdb) n
+main () at p8original.c:68
+68    Triangle small = find_smallest_triangle(n, t);
+(gdb) s
+find_smallest_triangle (n=3, t=0x7ffdfca8b760) at p8original.c:42
+42    small = t[0];
+(gdb) n
+44    for (int i = 1; i < n; i++)
+(gdb) n
+46      if (small.area > t[i].area)
+(gdb) n
+44    for (int i = 1; i < n; i++)
+(gdb) n
+46      if (small.area > t[i].area)
+(gdb) n
+44    for (int i = 1; i < n; i++)
+(gdb) n
+51    return small;
+(gdb) n
+52  }
+(gdb) n
+main () at p8original.c:69
+69    output(n, t, small);
+(gdb) s
+output (n=3, t=0x7ffdfca8b760, smallest=...) at p8original.c:55
+55    for (int i = 0; i < n - 1; i++)
+(gdb) n
+57      printf("%0.1f, %0.1f and\n", t[i].base, t[i].altitude);
+(gdb) n
+2.0, 4.0 and
+55    for (int i = 0; i < n - 1; i++)
+(gdb) n
+57      printf("%0.1f, %0.1f and\n", t[i].base, t[i].altitude);
+(gdb) n
+4.0, 6.0 and
+55    for (int i = 0; i < n - 1; i++)
+(gdb) n
+59    printf("%0.1f, %0.1f\nis\ntriangle with base = %0.1f and altitude = %0.1f having area = %0.1f\n", t[n-1].base, t[n-1].altitude, smallest.base, smallest.altitude, smallest.area);
+(gdb) n
+4.0, 8.0
+is
+triangle with base = 2.0 and altitude = 4.0 having area = 4.0
+60  }
+(gdb) n
+main () at p8original.c:70
+70    return 0;
+(gdb) n
+71  }
+(gdb) c
+Continuing.
+[Inferior 1 (process 46) exited normally]
